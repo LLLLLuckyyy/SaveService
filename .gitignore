@@ -1,0 +1,13 @@
+/SaveService/bin
+
+/SaveService/appsettings.Development.json
+
+/SaveService/*.user
+/SaveService/obj
+/SaveService/.vs
+
+/SaveService.Tests/bin
+
+/SaveService.Tests/obj
+/SaveService/Properties/PublishProfiles/*.user
+/SaveService/Properties/*.user
