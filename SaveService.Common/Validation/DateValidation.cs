@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SaveService.Common.Validation
 {
     public static class DateValidation
     {
-
-        public static bool IsAllowedToChange(DateTime createdAt)
+        public static bool IsEnoughTimeHasPassedToEditOrDelete(DateTime createdAt)
         {
             return (DateTime.Now - createdAt).TotalMinutes > 15;
         }

@@ -10,8 +10,8 @@ using SaveService.Resources.Api.Models;
 namespace SaveService.Resources.Api.Migrations
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20210715163140_UserMigration")]
-    partial class UserMigration
+    [Migration("20210624080744_BaseMigration")]
+    partial class BaseMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

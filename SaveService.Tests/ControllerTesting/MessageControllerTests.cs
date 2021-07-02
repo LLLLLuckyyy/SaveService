@@ -1,12 +1,9 @@
 ﻿using Moq;
 using SaveService.Resources.Api.Controllers;
-using SaveService.Resources.Api.Models;
 using SaveService.Resources.Api.Repository;
 using System.Net;
 using Xunit;
 using System;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 
 namespace SaveService.Tests.ControllerTesting
 {

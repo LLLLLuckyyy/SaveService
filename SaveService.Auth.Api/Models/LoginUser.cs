@@ -3,7 +3,7 @@ using SaveService.Auth.Api.Repository;
 
 namespace SaveService.Auth.Api.Models
 {
-    public class LoginUser : ICommonType
+    public class LoginUser : IAssociation
     {
         [Required]
         public string Login { get; set; }

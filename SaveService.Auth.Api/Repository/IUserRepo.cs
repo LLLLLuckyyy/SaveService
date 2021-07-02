@@ -1,8 +1,5 @@
 ﻿using SaveService.Auth.Api.Models;
-using System;
-using System.Net;
 using System.Threading.Tasks;
-using SaveService.Resources.Api.Models;
 using SaveService.Common.Authentication;
 
 namespace SaveService.Auth.Api.Repository

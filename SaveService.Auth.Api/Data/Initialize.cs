@@ -1,5 +1,4 @@
-﻿using SaveService.Auth.Api.Models;
-using SaveService.Resources.Api.Models;
+﻿using SaveService.Resources.Api.Models;
 using System.Linq;
 
 namespace SaveService.Auth.Api.Data

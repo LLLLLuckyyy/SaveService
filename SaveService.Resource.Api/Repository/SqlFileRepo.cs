@@ -2,11 +2,9 @@
 using SaveService.Resources.Api.Models;
 using System;
 using Microsoft.EntityFrameworkCore;
-using System.IO;
-using System.Net;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using SaveService.Common.Validation;
+using SaveService.Common.FileConversion;
 
 namespace SaveService.Resources.Api.Repository
 {
@@ -18,7 +16,6 @@ namespace SaveService.Resources.Api.Repository
         {
             _context = context;
         }
-
         
         public async Task<string> GetAsync(int IdOfFile, string login)
         {
@@ -35,7 +32,7 @@ namespace SaveService.Resources.Api.Repository
             {
                 var user = await _context.Users.FirstOrDefaultAsync(u => u.Login == login);
                 var file = await _context.Files.FirstOrDefaultAsync(f => f.Id == IdOfFile && f.UserId == user.Id);
-                if (DateValidation.IsAllowedToChange(file.CreatedAt))
+                if (DateValidation.IsEnoughTimeHasPassedToEditOrDelete(file.CreatedAt))
                 {
                     _context.Files.Remove(file);
                     await _context.SaveChangesAsync();
@@ -60,19 +57,14 @@ namespace SaveService.Resources.Api.Repository
             try
             {
                 var user = await _context.Users.FirstOrDefaultAsync(u => u.Login == login);
-                var fileModel = new FileModel();
-                fileModel.UserId = user.Id;
-                byte[] dataOfFileToSave = null;
-                using (var binaryReader = new BinaryReader(fileToSave.OpenReadStream()))
-                {
-                    dataOfFileToSave = binaryReader.ReadBytes((int)fileToSave.Length);
-                }
-                fileModel.File = dataOfFileToSave;
-                fileModel.CreatedAt = DateTime.Now;
+                var file = new FileModel();
 
-                await _context.Files.AddAsync(fileModel);
+                file.UserId = user.Id;
+                file.File = FileHandler.ConvertFileToBiteArray(fileToSave);
+                file.CreatedAt = DateTime.Now;
+
+                await _context.Files.AddAsync(file);
                 await _context.SaveChangesAsync();
-
                 await transaction.CommitAsync();
             }
             catch (Exception)
@@ -89,17 +81,11 @@ namespace SaveService.Resources.Api.Repository
             {
                 var user = await _context.Users.FirstOrDefaultAsync(u => u.Login == login);
                 var fileToChange = await _context.Files.FirstOrDefaultAsync(f => f.Id == IdOfFileToChange && f.UserId == user.Id);
-                if (DateValidation.IsAllowedToChange(fileToChange.CreatedAt))
+                if (DateValidation.IsEnoughTimeHasPassedToEditOrDelete(fileToChange.CreatedAt))
                 {
-                    byte[] dataOfFileToSave = null;
-                    using (var binaryReader = new BinaryReader(fileToSave.OpenReadStream()))
-                    {
-                        dataOfFileToSave = binaryReader.ReadBytes((int)fileToSave.Length);
-                    }
+                    fileToChange.File = FileHandler.ConvertFileToBiteArray(fileToSave);
 
-                    fileToChange.File = dataOfFileToSave;
                     await _context.SaveChangesAsync();
-
                     await transaction.CommitAsync();
                 }
                 else

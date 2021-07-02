@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using SaveService.Resources.Api.Repository;
 using Xunit;
 using Moq;

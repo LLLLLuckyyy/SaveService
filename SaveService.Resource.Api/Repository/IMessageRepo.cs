@@ -1,5 +1,4 @@
-﻿using System.Net;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace SaveService.Resources.Api.Repository
 {
@@ -8,6 +7,6 @@ namespace SaveService.Resources.Api.Repository
         Task<string> GetAsync(int IdOfMessage, string login);
         Task SaveAsync(string text, string login);
         Task DeleteAsync(int IdOfMessage, string login);
-        Task EditAsync(string text, int IdOfMessageToChange, string login);
+        Task EditAsync(string text, int IdOfMessage, string login);
     }
 }

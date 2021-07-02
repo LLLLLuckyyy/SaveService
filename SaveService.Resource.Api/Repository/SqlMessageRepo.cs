@@ -1,10 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
+﻿using Microsoft.EntityFrameworkCore;
 using SaveService.Resources.Api.Models;
 using SaveService.Common.Validation;
 using System;
-using System.Net;
 using System.Threading.Tasks;
 
 namespace SaveService.Resources.Api.Repository
@@ -17,7 +14,6 @@ namespace SaveService.Resources.Api.Repository
         {
             _context = context;
         }
-
 
         public async Task<string> GetAsync(int IdOfMessage, string login)
         {
@@ -36,7 +32,7 @@ namespace SaveService.Resources.Api.Repository
                 var messageOfUser = await _context.Messages
                     .FirstOrDefaultAsync(m => m.Id == IdOfMessage && m.UserId == user.Id);
 
-                if (DateValidation.IsAllowedToChange(messageOfUser.CreatedAt))
+                if (DateValidation.IsEnoughTimeHasPassedToEditOrDelete(messageOfUser.CreatedAt))
                 {
                     _context.Messages.Remove(messageOfUser);
                     await _context.SaveChangesAsync();
@@ -54,7 +50,6 @@ namespace SaveService.Resources.Api.Repository
             }
         }
 
-
         public async Task SaveAsync(string text, string login)
         {
             var transaction = await _context.Database.BeginTransactionAsync();
@@ -64,7 +59,6 @@ namespace SaveService.Resources.Api.Repository
                 var message = new MessageModel() { Text = text, UserId = user.Id, CreatedAt = DateTime.Now };
                 await _context.Messages.AddAsync(message);
                 await _context.SaveChangesAsync();
-                
                 await transaction.CommitAsync();
             }
             catch (Exception)
@@ -83,7 +77,7 @@ namespace SaveService.Resources.Api.Repository
                 var message = await _context.Messages
                     .FirstOrDefaultAsync(m => m.Id == IdOfMessageToChange && m.UserId == user.Id);
 
-                if (DateValidation.IsAllowedToChange(message.CreatedAt))
+                if (DateValidation.IsEnoughTimeHasPassedToEditOrDelete(message.CreatedAt))
                 {
                     message.Text = text;
                     await _context.SaveChangesAsync();

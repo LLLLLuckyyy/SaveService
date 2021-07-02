@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SaveService.Auth.Api\SaveService.Auth.Api.csproj" />
     <ProjectReference Include="..\SaveService.Resource.Api\SaveService.Resources.Api.csproj" />
   </ItemGroup>
 

@@ -20,7 +20,6 @@ namespace SaveService.Resources.Api.Controllers
             _context = context;
         }
 
-
         [HttpGet]
         [Route("[action]")]
         public async Task<ObjectResult> Get(int IdOfFile)

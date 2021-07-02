@@ -1,18 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Net;
-using System.Security.Claims;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
 using SaveService.Auth.Api.Models;
 using SaveService.Auth.Api.Repository;
 using SaveService.Common.Authentication;
-using SaveService.Resources.Api.Models;
 
 namespace SaveService.Auth.Api.Controllers
 {
@@ -31,45 +24,45 @@ namespace SaveService.Auth.Api.Controllers
 
         [HttpPost]
         [Route("[action]")]
-        public async Task<IActionResult> Login(/*[FromBody]*/ LoginUser request)
+        public async Task<ObjectResult> Login(LoginUser request)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
                     var token = await _context.LoginAsync(request, _authOptions.Value);
-                    return Ok(new { access_token = token });
+                    return new ObjectResult(new { access_token = token, status_code = HttpStatusCode.OK });
                 }
                 catch (Exception)
                 {
-                    return Unauthorized();
+                    return new ObjectResult(HttpStatusCode.Unauthorized);
                 }
             }
             else
             {
-                return Unauthorized();
+                return new ObjectResult(HttpStatusCode.Unauthorized);
             }
         }
 
         [HttpPost]
         [Route("[action]")]
-        public async Task<IActionResult> Register(RegisterUser request)
+        public async Task<ObjectResult> Register(RegisterUser request)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
                     var token = await _context.RegisterAsync(request, _authOptions.Value);
-                    return Ok(new { access_token = token });
+                    return new ObjectResult(new { access_token = token, status_code = HttpStatusCode.OK });
                 }
                 catch (Exception)
                 {
-                    return Unauthorized();
+                    return new ObjectResult(HttpStatusCode.Unauthorized);
                 }
             }
             else
             {
-                return Unauthorized();
+                return new ObjectResult(HttpStatusCode.Unauthorized);
             }
         }
     }

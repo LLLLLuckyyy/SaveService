@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SaveService.Resources.Api.Migrations
 {
-    public partial class UserMigration : Migration
+    public partial class BaseMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
