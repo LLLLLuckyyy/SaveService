@@ -40,7 +40,7 @@ namespace SaveService.Auth.Api.Repository
                 {
                     UserModel newUser = _mapper.Map<UserModel>(request);
                     var token = GenerateToken.GenerateJWT(newUser, authOptions);
-                    await _context.Users.AddAsync(newUser);
+                    await _context.AppUsers.AddAsync(newUser);
                     await _context.SaveChangesAsync();
                     await transaction.CommitAsync();
 

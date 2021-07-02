@@ -7,10 +7,10 @@ namespace SaveService.Auth.Api.Data
     {
         public static void Initializing(UserContext context)
         {
-            if (!context.Users.Any())
+            if (!context.AppUsers.Any())
             {
                 var user = new UserModel { Login = "admin", Password = "admin" };
-                context.Users.Add(user);
+                context.AppUsers.Add(user);
 
                 context.SaveChanges();
             }

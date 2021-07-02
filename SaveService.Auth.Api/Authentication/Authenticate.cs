@@ -9,7 +9,7 @@ namespace SaveService.Auth.Api.Authentication
     {
         public static async Task<UserModel> AuthenticateUserAsync(IAssociation user, UserContext context)
         {
-            return await context.Users
+            return await context.AppUsers
                 .FirstOrDefaultAsync(u => u.Login == user.Login && u.Password == user.Password);
         }
     }
