@@ -15,8 +15,8 @@ namespace SaveService.Resources.Api.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasAnnotation("ProductVersion", "3.1.16")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.7")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("SaveService.Resources.Api.Models.FileModel", b =>
@@ -84,7 +84,7 @@ namespace SaveService.Resources.Api.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("AppUsers");
                 });
 
             modelBuilder.Entity("SaveService.Resources.Api.Models.FileModel", b =>
@@ -99,13 +99,6 @@ namespace SaveService.Resources.Api.Migrations
                     b.HasOne("SaveService.Resources.Api.Models.UserModel", null)
                         .WithMany("Messages")
                         .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("SaveService.Resources.Api.Models.UserModel", b =>
-                {
-                    b.Navigation("Files");
-
-                    b.Navigation("Messages");
                 });
 #pragma warning restore 612, 618
         }

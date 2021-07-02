@@ -17,7 +17,7 @@ namespace SaveService.Resources.Api.Repository
 
         public async Task<string> GetAsync(int IdOfMessage, string login)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Login == login);
+            var user = await _context.AppUsers.FirstOrDefaultAsync(u => u.Login == login);
             var messageOfUser = await _context.Messages
                 .FirstOrDefaultAsync(m => m.Id == IdOfMessage && m.UserId == user.Id);
             return messageOfUser.Text;
@@ -28,7 +28,7 @@ namespace SaveService.Resources.Api.Repository
             var transaction = await _context.Database.BeginTransactionAsync();
             try
             {
-                var user = await _context.Users.FirstOrDefaultAsync(u => u.Login == login);
+                var user = await _context.AppUsers.FirstOrDefaultAsync(u => u.Login == login);
                 var messageOfUser = await _context.Messages
                     .FirstOrDefaultAsync(m => m.Id == IdOfMessage && m.UserId == user.Id);
 
@@ -55,7 +55,7 @@ namespace SaveService.Resources.Api.Repository
             var transaction = await _context.Database.BeginTransactionAsync();
             try
             {
-                var user = await _context.Users.FirstOrDefaultAsync(u => u.Login == login);
+                var user = await _context.AppUsers.FirstOrDefaultAsync(u => u.Login == login);
                 var message = new MessageModel() { Text = text, UserId = user.Id, CreatedAt = DateTime.Now };
                 await _context.Messages.AddAsync(message);
                 await _context.SaveChangesAsync();
@@ -73,7 +73,7 @@ namespace SaveService.Resources.Api.Repository
             var transaction = await _context.Database.BeginTransactionAsync();
             try
             {
-                var user = await _context.Users.FirstOrDefaultAsync(u => u.Login == login);
+                var user = await _context.AppUsers.FirstOrDefaultAsync(u => u.Login == login);
                 var message = await _context.Messages
                     .FirstOrDefaultAsync(m => m.Id == IdOfMessageToChange && m.UserId == user.Id);
 
