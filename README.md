@@ -15,10 +15,11 @@ Solution contains:
 - Api that has resource part (i.e part, that provides access to user's messages/files).
 - Extra classes library.
 - Unit tests of resource part.
+- Gitignore file.
 
 Used services: 
-- Auto Mapper
-- Swashbuckle
-- Entity Framework Core
-- System.IdentityModel.Tokens.Jwt
-- Moq and XUnit frameworks
+- Auto Mapper.
+- Swashbuckle.
+- Entity Framework Core.
+- System.IdentityModel.Tokens.Jwt.
+- Moq and XUnit frameworks.
