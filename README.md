@@ -13,7 +13,7 @@ That is a service of saving messages/files.
 Solution contains:
 - Authentication Api.
 - Api that has resource part (i.e part, that provides access to user's messages/files).
-- Extra class library.
+- Extra classes library.
 - Unit tests of resource part.
 
 Used services: 
