@@ -7,10 +7,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using SaveService.Data;
-using SaveService.Models;
+using SaveService.Auth.Api.Data;
+using SaveService.Auth.Api.Models;
+using SaveService.Resources.Api.Models;
 
-namespace SaveService
+namespace SaveService.Auth.Api
 {
     public class Program
     {

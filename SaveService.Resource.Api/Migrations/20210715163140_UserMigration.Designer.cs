@@ -5,12 +5,12 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using SaveService.Models;
+using SaveService.Resources.Api.Models;
 
-namespace SaveService.Migrations
+namespace SaveService.Resources.Api.Migrations
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20210612103439_UserMigration")]
+    [Migration("20210715163140_UserMigration")]
     partial class UserMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,7 +21,7 @@ namespace SaveService.Migrations
                 .HasAnnotation("ProductVersion", "5.0.7")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("SaveService.Models.FileModel", b =>
+            modelBuilder.Entity("SaveService.Resources.Api.Models.FileModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -45,7 +45,7 @@ namespace SaveService.Migrations
                     b.ToTable("Files");
                 });
 
-            modelBuilder.Entity("SaveService.Models.MessageModel", b =>
+            modelBuilder.Entity("SaveService.Resources.Api.Models.MessageModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -69,7 +69,7 @@ namespace SaveService.Migrations
                     b.ToTable("Messages");
                 });
 
-            modelBuilder.Entity("SaveService.Models.UserModel", b =>
+            modelBuilder.Entity("SaveService.Resources.Api.Models.UserModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -89,21 +89,21 @@ namespace SaveService.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("SaveService.Models.FileModel", b =>
+            modelBuilder.Entity("SaveService.Resources.Api.Models.FileModel", b =>
                 {
-                    b.HasOne("SaveService.Models.UserModel", null)
+                    b.HasOne("SaveService.Resources.Api.Models.UserModel", null)
                         .WithMany("Files")
                         .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("SaveService.Models.MessageModel", b =>
+            modelBuilder.Entity("SaveService.Resources.Api.Models.MessageModel", b =>
                 {
-                    b.HasOne("SaveService.Models.UserModel", null)
+                    b.HasOne("SaveService.Resources.Api.Models.UserModel", null)
                         .WithMany("Messages")
                         .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("SaveService.Models.UserModel", b =>
+            modelBuilder.Entity("SaveService.Resources.Api.Models.UserModel", b =>
                 {
                     b.Navigation("Files");
 

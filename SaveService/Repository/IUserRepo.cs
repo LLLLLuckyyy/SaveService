@@ -1,13 +1,15 @@
-﻿using SaveService.Models;
+﻿using SaveService.Auth.Api.Models;
 using System;
 using System.Net;
 using System.Threading.Tasks;
+using SaveService.Resources.Api.Models;
+using SaveService.Common.Authentication;
 
-namespace SaveService.Repository
+namespace SaveService.Auth.Api.Repository
 {
     public interface IUserRepo
     {
-        public Task RegisterAsync(RegisterUser user, Func<string, Task> del);
-        public Task LoginAsync(LoginUser user, Func<string, Task> del);
+        public Task<string> RegisterAsync(RegisterUser user, AuthOptions options);
+        public Task<string> LoginAsync(LoginUser user, AuthOptions options);
     }
 }

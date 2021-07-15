@@ -1,21 +1,21 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using SaveService.Repository;
-using SaveService.Validation;
+using SaveService.Resources.Api.Repository;
+using System;
 
-namespace SaveService.Controllers
+namespace SaveService.Resources.Api.Controllers
 {
     [Route("[controller]")]
     [ApiController]
     [Authorize]
-    public class MessageController : ControllerBase
+    public class FileController : ControllerBase
     {
-        private readonly IMessageRepo _context;
+        private readonly IFileRepo _context;
 
-        public MessageController(IMessageRepo context)
+        public FileController(IFileRepo context)
         {
             _context = context;
         }
@@ -23,14 +23,14 @@ namespace SaveService.Controllers
 
         [HttpGet]
         [Route("[action]")]
-        public async Task<ObjectResult> Get(int IdOfMessage)
+        public async Task<ObjectResult> Get(int IdOfFile)
         {
-            if (IdOfMessage > 0)
+            if (IdOfFile > 0)
             {
                 try
                 {
-                    var messageText = await _context.GetAsync(IdOfMessage, User.Identity.Name);
-                    return new ObjectResult(messageText);
+                    var fileInBites = await _context.GetAsync(IdOfFile, User.Identity.Name);
+                    return new ObjectResult(fileInBites);
                 }
                 catch (NullReferenceException)
                 {
@@ -49,13 +49,13 @@ namespace SaveService.Controllers
 
         [HttpPost]
         [Route("[action]")]
-        public async Task<HttpStatusCode> Save(string text)
+        public async Task<HttpStatusCode> Save(IFormFile file)
         {
-            if (!string.IsNullOrWhiteSpace(text))
+            if (file != null)
             {
                 try
                 {
-                    await _context.SaveAsync(text, User.Identity.Name);
+                    await _context.SaveAsync(file, User.Identity.Name);
                     return HttpStatusCode.OK;
                 }
                 catch (NullReferenceException)
@@ -73,16 +73,15 @@ namespace SaveService.Controllers
             }
         }
 
-
         [HttpDelete]
         [Route("[action]")]
-        public async Task<HttpStatusCode> Delete(int IdOfMessage)
+        public async Task<HttpStatusCode> Delete(int IdOfFile)
         {
-            if (IdOfMessage > 0)
+            if (IdOfFile > 0)
             {
                 try
                 {
-                    await _context.DeleteAsync(IdOfMessage, User.Identity.Name);
+                    await _context.DeleteAsync(IdOfFile, User.Identity.Name);
                     return HttpStatusCode.OK;
                 }
                 catch (NullReferenceException)
@@ -106,13 +105,13 @@ namespace SaveService.Controllers
 
         [HttpPut]
         [Route("[action]")]
-        public async Task<HttpStatusCode> Edit(string text, int IdOfMessageToChange)
+        public async Task<HttpStatusCode> Edit(IFormFile file, int IdOfFileToChange)
         {
-            if (!string.IsNullOrWhiteSpace(text) && IdOfMessageToChange > 0)
+            if (file != null && IdOfFileToChange > 0)
             {
                 try
                 {
-                    await _context.EditAsync(text, IdOfMessageToChange, User.Identity.Name);
+                    await _context.EditAsync(file, IdOfFileToChange, User.Identity.Name);
                     return HttpStatusCode.OK;
                 }
                 catch (NullReferenceException)

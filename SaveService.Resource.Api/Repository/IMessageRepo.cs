@@ -1,9 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using SaveService.Models;
-using System.Net;
+﻿using System.Net;
 using System.Threading.Tasks;
 
-namespace SaveService.Repository
+namespace SaveService.Resources.Api.Repository
 {
     public interface IMessageRepo
     {

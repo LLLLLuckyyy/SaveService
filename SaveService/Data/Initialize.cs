@@ -1,7 +1,8 @@
-﻿using SaveService.Models;
+﻿using SaveService.Auth.Api.Models;
+using SaveService.Resources.Api.Models;
 using System.Linq;
 
-namespace SaveService.Data
+namespace SaveService.Auth.Api.Data
 {
     public static class Initialize
     {

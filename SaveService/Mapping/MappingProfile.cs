@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
-using SaveService.Models;
+using SaveService.Auth.Api.Models;
+using SaveService.Resources.Api.Models;
 
-namespace SaveService.Mapping
+namespace SaveService.Auth.Api.Mapping
 {
     public class MappingProfile : Profile
     {

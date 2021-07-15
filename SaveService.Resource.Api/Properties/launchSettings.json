@@ -1,11 +1,18 @@
 ﻿{
   "$schema": "http://json.schemastore.org/launchsettings.json",
+  "Kestrel": {
+    "EndPoints": {
+      "Http": {
+        "applicationUrl": "https://localhost:5003;http://localhost:5002"
+      }
+    }
+  },
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:56001",
-      "sslPort": 44303
+      "applicationUrl": "http://localhost:49247",
+      "sslPort": 44315
     }
   },
   "profiles": {
@@ -17,11 +24,11 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "SaveService.Auth.Api": {
+    "SaveService.Resource.Api": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",
-      "applicationUrl": "https://localhost:5001;http://localhost:5000",
+      "applicationUrl": "https://localhost:5003;http://localhost:5002",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

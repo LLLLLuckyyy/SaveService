@@ -1,8 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using SaveService.Resources.Api.Models;
 
-namespace SaveService.Models
+namespace SaveService.Resources.Api.Models
 {
-    public class UserContext:DbContext
+    public class UserContext : DbContext
     {
         public DbSet<UserModel> Users { get; set; }
         public DbSet<MessageModel> Messages { get; set; }

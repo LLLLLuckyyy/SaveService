@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNetCore.Http;
-using SaveService.Models;
+using SaveService.Resources.Api.Models;
 using System;
 using Microsoft.EntityFrameworkCore;
 using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using SaveService.Validation;
+using SaveService.Common.Validation;
 
-namespace SaveService.Repository
+namespace SaveService.Resources.Api.Repository
 {
     public class SqlFileRepo : IFileRepo
     {

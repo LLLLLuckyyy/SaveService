@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using SaveService.Auth.Api.Repository;
 
-namespace SaveService.Models
+namespace SaveService.Auth.Api.Models
 {
-    public class LoginUser
+    public class LoginUser : ICommonType
     {
         [Required]
         public string Login { get; set; }

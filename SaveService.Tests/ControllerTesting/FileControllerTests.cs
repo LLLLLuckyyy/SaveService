@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using SaveService.Repository;
+using SaveService.Resources.Api.Repository;
 using Xunit;
 using Moq;
 using System.Net;
-using SaveService.Controllers;
+using SaveService.Resources.Api.Controllers;
 using Microsoft.AspNetCore.Http;
 using System.IO;
 

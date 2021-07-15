@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace SaveService.Models
+namespace SaveService.Resources.Api.Models
 {
     public class FileModel
     {

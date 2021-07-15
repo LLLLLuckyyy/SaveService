@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace SaveService.Migrations
+namespace SaveService.Resources.Api.Migrations
 {
     public partial class UserMigration : Migration
     {

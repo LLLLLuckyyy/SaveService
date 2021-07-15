@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace SaveService.Repository
+namespace SaveService.Resources.Api.Repository
 {
     public interface IFileRepo
     {

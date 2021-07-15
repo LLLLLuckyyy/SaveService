@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
-using SaveService.Models;
-using SaveService.Validation;
+using SaveService.Resources.Api.Models;
+using SaveService.Common.Validation;
 using System;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace SaveService.Repository
+namespace SaveService.Resources.Api.Repository
 {
     public class SqlMessageRepo : IMessageRepo
     {

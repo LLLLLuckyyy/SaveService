@@ -2,9 +2,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace SaveService.Models
+namespace SaveService.Resources.Api.Models
 {
-    public class UserModel
+    public partial class UserModel
     {
         [Key]
         public int Id { get; set; }

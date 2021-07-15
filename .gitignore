@@ -11,3 +11,13 @@
 /SaveService.Tests/obj
 /SaveService/Properties/PublishProfiles/*.user
 /SaveService/Properties/*.user
+/SaveService/.config
+/SaveService.Common/bin
+/SaveService.Common/obj
+/SaveService.Resource.Api/.config
+/SaveService.Resource.Api/bin
+/SaveService.Resource.Api/obj
+/SaveService.Resource.Api/Properties/*.user
+/SaveService.Resource.Api/Properties/PublishProfiles/*.user
+/SaveService.Resource.Api/appsettings.Development.json
+/SaveService.Resource.Api/*.user

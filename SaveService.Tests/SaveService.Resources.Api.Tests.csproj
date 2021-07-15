@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SaveService\SaveService.csproj" />
+    <ProjectReference Include="..\SaveService.Resource.Api\SaveService.Resources.Api.csproj" />
   </ItemGroup>
 
 </Project>

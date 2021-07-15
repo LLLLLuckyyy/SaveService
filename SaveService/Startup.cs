@@ -13,11 +13,17 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using SaveService.Mapping;
-using SaveService.Models;
-using SaveService.Repository;
+using SaveService.Common.Authentication;
+using SaveService.Auth.Api.Mapping;
+using SaveService.Auth.Api.Models;
+using SaveService.Auth.Api.Repository;
+using SaveService.Resources.Api.Models;
+using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using SaveService.Resources.Api.Repository;
+using SaveService.Common.SwaggerFilters;
 
-namespace SaveService
+namespace SaveService.Auth.Api
 {
     public class Startup
     {
@@ -31,18 +37,22 @@ namespace SaveService
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<IUserRepo, SqlUserRepo>();
-            services.AddTransient<IFileRepo, SqlFileRepo>();
-            services.AddTransient<IMessageRepo, SqlMessageRepo>();
 
             string connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<UserContext>(options => options.UseSqlServer(connection));
 
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(options =>
+            var authOptionsConfiguration = Configuration.GetSection("Auth");
+            services.Configure<AuthOptions>(authOptionsConfiguration);
+
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
                 {
-                    options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/User/Login");
+                    builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
                 });
-            services.AddAuthorization();
+            });
 
             var mappingConfig = new MapperConfiguration(mc =>
             {
@@ -54,7 +64,7 @@ namespace SaveService
 
             services.AddControllers();
 
-            services.AddSwaggerGen();
+            services.AddSwaggerGen(c => c.DocumentFilter<SwaggerFilterForAuth>());
         }
 
 
@@ -66,16 +76,14 @@ namespace SaveService
             }
 
             app.UseSwagger();
-
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
 
-            app.UseRouting();
+            app.UseCors();
 
-            app.UseAuthentication();
-            app.UseAuthorization();
+            app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {

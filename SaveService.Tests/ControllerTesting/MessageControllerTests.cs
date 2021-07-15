@@ -1,9 +1,7 @@
 ﻿using Moq;
-using SaveService.Controllers;
-using SaveService.Models;
-using SaveService.Repository;
-using SaveService.Controllers;
-using SaveService.Repository;
+using SaveService.Resources.Api.Controllers;
+using SaveService.Resources.Api.Models;
+using SaveService.Resources.Api.Repository;
 using System.Net;
 using Xunit;
 using System;
